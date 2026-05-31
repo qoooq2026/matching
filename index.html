@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>QOOOQ Matching</title>
+
+<style>
+:root{
+--bg:#102f28;
+--bg2:#173b32;
+--text:#f5f5f0;
+--muted:#93aaa1;
+--accent:#ff6b55;
+--line:rgba(255,255,255,.12);
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:linear-gradient(135deg,#102f28,#0c211d);
+color:var(--text);
+font-family:Arial,"Noto Sans TC",sans-serif;
+}
+
+header{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 40px;
+border-bottom:1px solid var(--line);
+}
+
+.logo{
+font-size:34px;
+font-weight:900;
+letter-spacing:-3px;
+}
+
+.dot{
+color:var(--accent);
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-size:12px;
+letter-spacing:4px;
+}
+
+.hero{
+padding:120px 20px;
+text-align:center;
+}
+
+.hero small{
+color:var(--accent);
+letter-spacing:8px;
+}
+
+.hero h1{
+font-size:88px;
+line-height:.95;
+margin:20px 0;
+}
+
+.hero p{
+color:var(--muted);
+font-size:20px;
+}
+
+.cta{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.btn{
+padding:18px 30px;
+font-weight:800;
+cursor:pointer;
+border:none;
+}
+
+.primary{
+background:var(--accent);
+color:white;
+}
+
+.secondary{
+background:transparent;
+border:1px solid var(--line);
+color:white;
+}
+
+.stats{
+max-width:900px;
+margin:60px auto;
+padding:30px;
+border:1px solid var(--line);
+background:rgba(0,0,0,.15);
+text-align:center;
+}
+
+.stats h2{
+font-size:70px;
+margin:0;
+}
+
+.stats p{
+color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">QOOOQ<span class="dot">•</span></div>
+
+<nav>
+<a href="tasks.html">TASKS</a>
+<a href="login.html">LOGIN</a>
+</nav>
+</header>
+
+<section class="hero">
+
+<small>QOOOQ MATCHING PLATFORM</small>
+
+<h1>
+找到對的人<br>
+比找到流量重要
+</h1>
+
+<p>
+品牌發案、寫手接案、AI媒合
+</p>
+
+<div class="cta">
+<button class="btn primary"
+onclick="location.href='register.html'">
+立即加入
+</button>
+
+<button class="btn secondary"
+onclick="location.href='tasks.html'">
+查看任務
+</button>
+</div>
+
+<div class="stats">
+<p>LIVE TASK WALL</p>
+<h2>24</h2>
+<p>目前開放任務</p>
+</div>
+
+</section>
+
+</body>
+</html>
