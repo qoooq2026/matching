@@ -1,40 +1,204 @@
-:root{
-  --bg:#102f28;
-  --bg2:#173b32;
-  --card:rgba(18,54,45,.85);
-  --text:#f5f5f0;
-  --muted:#93aaa1;
-  --accent:#ff6b55;
-  --line:rgba(255,255,255,.12);
-  --green:#5ee18a;
+:root {
+  --bg: #102f28;
+  --bg2: #173b32;
+  --card: rgba(18,54,45,.85);
+  --text: #f5f5f0;
+  --muted: #93aaa1;
+  --accent: #ff6b55;
+  --line: rgba(255,255,255,.12);
+  --green: #5ee18a;
 }
 
-*{
-  box-sizing:border-box;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #102f28, #0b211d);
+  color: var(--text);
+  font-family: Arial, "Noto Sans TC", sans-serif;
+  min-height: 100vh;
 }
 
-body{
-  margin:0;
-  background:linear-gradient(135deg,#102f28,#0b211d);
-  color:var(--text);
-  font-family:Arial,"Noto Sans TC",sans-serif;
+/* ── Header ── */
+header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(16,47,40,.95);
+  z-index: 100;
 }
 
-.logo{
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:-3px;
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -3px;
+  text-decoration: none;
+  color: var(--text);
 }
 
-.dot{
-  color:var(--accent);
+.dot { color: var(--accent); }
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.btn{
-  background:var(--accent);
-  color:white;
-  border:0;
-  padding:14px 22px;
-  font-weight:800;
-  cursor:pointer;
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  opacity: .7;
+  transition: opacity .2s;
+}
+
+nav a:hover { opacity: 1; }
+
+/* header 右側用戶資訊 */
+#header-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.user-role {
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.tag-brand {
+  background: rgba(255,107,85,.2);
+  color: var(--accent);
+  border: 1px solid rgba(255,107,85,.3);
+}
+
+.tag-writer {
+  background: rgba(94,225,138,.15);
+  color: var(--green);
+  border: 1px solid rgba(94,225,138,.25);
+}
+
+/* ── Buttons ── */
+.btn {
+  background: var(--accent);
+  color: white;
+  border: 0;
+  padding: 13px 22px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity .2s;
+}
+
+.btn:hover { opacity: .85; }
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid var(--line);
+  padding: 13px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 13px;
+  transition: border-color .2s;
+}
+
+.btn-outline:hover { border-color: rgba(255,255,255,.4); }
+
+/* ── Form elements ── */
+label {
+  display: block;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 13px;
+  margin-top: 6px;
+  background: #0c241f;
+  color: white;
+  border: 1px solid var(--line);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: rgba(255,255,255,.35);
+}
+
+select option { background: #0c241f; }
+
+/* ── Card ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 24px;
+}
+
+/* ── Tag badge ── */
+.tag {
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+/* ── Wrap (form pages) ── */
+.wrap {
+  max-width: 500px;
+  margin: 70px auto;
+  padding: 36px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+}
+
+/* ── Tags multi-select ── */
+.tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tag-chip {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  transition: all .2s;
+  user-select: none;
+}
+
+.tag-chip.selected {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(255,107,85,.1);
 }
