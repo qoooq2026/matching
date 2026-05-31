@@ -1,0 +1,40 @@
+:root{
+  --bg:#102f28;
+  --bg2:#173b32;
+  --card:rgba(18,54,45,.85);
+  --text:#f5f5f0;
+  --muted:#93aaa1;
+  --accent:#ff6b55;
+  --line:rgba(255,255,255,.12);
+  --green:#5ee18a;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(135deg,#102f28,#0b211d);
+  color:var(--text);
+  font-family:Arial,"Noto Sans TC",sans-serif;
+}
+
+.logo{
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:-3px;
+}
+
+.dot{
+  color:var(--accent);
+}
+
+.btn{
+  background:var(--accent);
+  color:white;
+  border:0;
+  padding:14px 22px;
+  font-weight:800;
+  cursor:pointer;
+}
