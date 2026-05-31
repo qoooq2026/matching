@@ -2,125 +2,102 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>發布任務</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QOOOQ 發布任務</title>
+<link rel="stylesheet" href="css/style.css">
 <style>
-:root{
---bg:#102f28;
---card:#173b32;
---text:#f5f5f0;
---muted:#93aaa1;
---accent:#ff6b55;
---line:rgba(255,255,255,.12);
-}
-
-body{
-margin:0;
-background:var(--bg);
-color:white;
-font-family:Arial;
-}
-
-.wrap{
-max-width:700px;
-margin:50px auto;
-padding:30px;
-background:var(--card);
-border:1px solid var(--line);
-}
-
-input,textarea,select{
-width:100%;
-padding:14px;
-margin-top:8px;
-margin-bottom:20px;
-background:#0c241f;
-color:white;
-border:1px solid var(--line);
-}
-
-button{
-width:100%;
-padding:18px;
-background:var(--accent);
-border:none;
-color:white;
-font-weight:800;
-cursor:pointer;
-}
+.wrap { max-width: 620px; }
 </style>
 </head>
-
 <body>
 
+<header>
+  <a class="logo" href="index.html">QOOOQ<span class="dot">•</span></a>
+  <nav>
+    <a href="tasks.html">TASKS</a>
+    <div id="header-user"></div>
+  </nav>
+</header>
+
 <div class="wrap">
+  <div class="tag" style="margin-bottom:12px">POST A TASK</div>
+  <h1 style="font-size:36px;margin:0 0 28px">發布任務</h1>
 
-<h1>發布任務</h1>
+  <label>品牌名稱</label>
+  <input id="brand" placeholder="例：OOO 品牌">
 
-<input id="brand" placeholder="品牌">
+  <label>商品 / 服務</label>
+  <input id="product" placeholder="例：OOO 保健品">
 
-<input id="product" placeholder="商品">
+  <label>任務標題</label>
+  <input id="title" placeholder="例：Threads 開箱文 × 保健品體驗">
 
-<input id="title" placeholder="任務標題">
+  <label>任務說明</label>
+  <textarea id="description" rows="5" placeholder="說明任務內容、需求、注意事項..."></textarea>
 
-<textarea id="description"
-placeholder="任務說明"></textarea>
+  <label>平台</label>
+  <select id="platform">
+    <option>Threads</option>
+    <option>Instagram</option>
+    <option>TikTok</option>
+    <option>Dcard</option>
+    <option>痞客邦</option>
+    <option>方格子</option>
+  </select>
 
-<select id="platform">
-<option>Threads</option>
-<option>Instagram</option>
-<option>TikTok</option>
-<option>Dcard</option>
-</select>
+  <label>品類</label>
+  <input id="category" placeholder="例：保健、美妝、食品">
 
-<input id="category" placeholder="品類">
+  <label>預算（每篇，NT$）</label>
+  <input id="budget" type="number" placeholder="例：1000">
 
-<input id="budget" placeholder="預算">
+  <label>招募名額</label>
+  <input id="quota" type="number" placeholder="例：5">
 
-<input id="quota" placeholder="名額">
-
-<button onclick="createTask()">
-發布任務
-</button>
-
+  <button class="btn" style="width:100%;margin-top:28px" onclick="createTask()">發布任務</button>
 </div>
 
+<script src="js/app.js"></script>
 <script>
+const user = requireLogin();
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxna_AGF5BSmpJ2y8Z5ayp9_9HKHX1S5th9ilZEF5fj8aF3g2u-F44klv_A5M1aVHPkCQ/exec";
-
-const user =
-JSON.parse(localStorage.getItem("user"));
-
-async function createTask(){
-
-const payload = {
-action:"createTask",
-brandUserId:user.userId,
-brand:brand.value,
-product:product.value,
-title:title.value,
-description:description.value,
-platform:platform.value,
-category:category.value,
-budget:budget.value,
-quota:quota.value
-};
-
-const res = await fetch(API_URL,{
-method:"POST",
-body:JSON.stringify(payload)
-});
-
-const data = await res.json();
-
-if(data.success){
-alert("建立成功");
-location.href="tasks.html";
+// 只有品牌方可以發任務
+if (user && user.role !== "brand") {
+  alert("發任務功能僅開放給品牌方。\n寫手請在任務牆瀏覽並報名任務！");
+  location.href = "tasks.html";
 }
+renderHeaderUser();
+
+async function createTask() {
+  const title = document.getElementById("title").value.trim();
+  if (!title) { alert("請填寫任務標題"); return; }
+
+  const payload = {
+    action:      "createTask",
+    brandUserId: user.userId,
+    brand:       document.getElementById("brand").value,
+    product:     document.getElementById("product").value,
+    title,
+    description: document.getElementById("description").value,
+    platform:    document.getElementById("platform").value,
+    category:    document.getElementById("category").value,
+    budget:      document.getElementById("budget").value,
+    quota:       document.getElementById("quota").value
+  };
+
+  const res = await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+
+  if (data.success) {
+    alert("任務發布成功！");
+    location.href = "tasks.html";
+  } else {
+    alert(data.message || "發布失敗");
+  }
 }
 </script>
-
 </body>
 </html>
